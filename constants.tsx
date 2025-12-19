@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { LocationOption } from './types.ts';
+import { LocationOption } from './types';
 
 export const LOCATIONS: LocationOption[] = [
   {
