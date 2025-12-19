@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { RegistrationData, LocationOption } from '../types';
-import { LOCATIONS } from '../constants';
+import { RegistrationData } from '../types.ts';
+import { LOCATIONS } from '../constants.tsx';
 
 interface RegistrationFormProps {
   onSubmit: (data: RegistrationData) => void;

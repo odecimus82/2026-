@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { AppTab, RegistrationData } from './types';
-import { CORSAIR_LOGO, LOCATIONS } from './constants';
-import RegistrationForm from './components/RegistrationForm';
-import PhotoGallery from './components/PhotoGallery';
+import { AppTab, RegistrationData } from './types.ts';
+import { CORSAIR_LOGO, LOCATIONS } from './constants.tsx';
+import RegistrationForm from './components/RegistrationForm.tsx';
+import PhotoGallery from './components/PhotoGallery.tsx';
 
 const AdminDashboard: React.FC<{ registrations: RegistrationData[] }> = ({ registrations }) => {
   return (
@@ -133,7 +133,6 @@ const App: React.FC = () => {
             
             <div className="h-4 w-[1px] bg-zinc-200 mx-1"></div>
             
-            {/* 更显眼的后台入口 */}
             <button 
               onClick={() => setActiveTab(AppTab.ADMIN)}
               className={`flex items-center gap-2 px-3 py-2 rounded-xl border-2 transition-all ${
