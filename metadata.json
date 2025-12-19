@@ -1,0 +1,7 @@
+{
+  "name": "Corsair Team Building 2024 - Dongguan BBQ",
+  "description": "A stylish registration and image editing app for the Corsair team-building event in Dongguan. Features location voting, family registration, and Gemini-powered photo editing.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
