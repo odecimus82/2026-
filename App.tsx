@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { AppTab, RegistrationData } from './types';
-import { CORSAIR_LOGO, LOCATIONS } from './constants';
-import RegistrationForm from './components/RegistrationForm';
-import PhotoGallery from './components/PhotoGallery';
+import { AppTab, RegistrationData } from './types.ts';
+import { CORSAIR_LOGO, LOCATIONS } from './constants.tsx';
+import RegistrationForm from './components/RegistrationForm.tsx';
+import PhotoGallery from './components/PhotoGallery.tsx';
 
 const AdminDashboard: React.FC<{ registrations: RegistrationData[] }> = ({ registrations }) => {
   return (
@@ -104,7 +104,7 @@ const App: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActiveTab(AppTab.INFO)}>
             {CORSAIR_LOGO}
-            <h1 className="font-corsair text-sm md:text-lg font-black tracking-widest text-zinc-900 hidden xs:block">
+            <h1 className="font-corsair text-sm md:text-lg font-black tracking-widest text-zinc-900 hidden sm:block">
               CORSAIR <span className="text-orange-500">TEAM</span>
             </h1>
           </div>
@@ -112,7 +112,7 @@ const App: React.FC = () => {
             {[
               { id: AppTab.INFO, label: '详情' },
               { id: AppTab.REGISTER, label: '报名' },
-              { id: AppTab.GALLERY, label: '图集' }
+              { id: AppTab.GALLERY, label: '图库' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -127,13 +127,12 @@ const App: React.FC = () => {
               </button>
             ))}
             
-            {/* 明显的后台入口按钮 */}
             <button 
               onClick={() => setActiveTab(AppTab.ADMIN)}
-              title="进入管理后台"
+              title="管理后台"
               className={`p-2 rounded-xl transition-all border-2 ${
                 activeTab === AppTab.ADMIN 
-                  ? 'bg-zinc-900 text-yellow-400 border-zinc-900 scale-110 shadow-lg' 
+                  ? 'bg-zinc-900 text-yellow-400 border-zinc-900 scale-105 shadow-md' 
                   : 'text-zinc-400 border-transparent hover:bg-zinc-100 hover:text-zinc-800'
               }`}
             >
@@ -146,39 +145,36 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 mt-6 md:mt-10">
+      <main className="max-w-6xl mx-auto px-4 mt-4 md:mt-10">
         {activeTab === AppTab.INFO && (
           <div className="space-y-8 md:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {/* Hero Section */}
-            <div className="relative rounded-[2.5rem] overflow-hidden min-h-[380px] sm:min-h-[420px] md:aspect-[21/9] flex items-center shadow-2xl shadow-orange-200/40">
+            {/* Hero Section - Improved Responsiveness */}
+            <div className="relative rounded-[2.5rem] overflow-hidden min-h-[400px] md:aspect-[21/9] flex items-center shadow-2xl shadow-orange-200/40">
               <div className="absolute inset-0 bg-zinc-900">
                 <img 
                   src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1600&auto=format&fit=crop" 
-                  className="w-full h-full object-cover opacity-70" 
-                  alt="BBQ Feast" 
+                  className="w-full h-full object-cover opacity-60" 
+                  alt="BBQ" 
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
               
               <div className="relative z-10 w-full px-6 sm:px-12 py-10 flex flex-col items-center text-center space-y-6">
-                <div className="space-y-2">
-                  <h2 className="font-corsair font-black text-white drop-shadow-2xl">
-                    <span className="block text-3xl sm:text-5xl md:text-7xl tracking-tighter leading-none mb-1">CORSAIR</span>
-                    <span className="text-yellow-400 block text-2xl sm:text-4xl md:text-6xl tracking-tight font-black uppercase">金秋野炊团建</span>
-                  </h2>
-                </div>
+                <h2 className="font-corsair font-black text-white drop-shadow-2xl">
+                  <span className="block text-4xl sm:text-5xl md:text-7xl tracking-tighter leading-none mb-2">CORSAIR</span>
+                  <span className="text-yellow-400 block text-2xl sm:text-4xl md:text-6xl tracking-tight uppercase">金秋野炊团建</span>
+                </h2>
                 
-                {/* 日期栏 */}
                 <div className="bg-white/95 backdrop-blur-md px-6 py-3 md:px-10 md:py-4 rounded-full shadow-2xl border border-white/50 flex items-center gap-3">
                   <span className="text-xl md:text-2xl">🗓️</span>
                   <div className="flex items-center gap-2">
                     <span className="text-orange-500 font-black text-sm md:text-xl">日期:</span>
-                    <span className="text-zinc-800 font-black text-sm md:text-xl tracking-tight">2026年1月10日</span>
+                    <span className="text-zinc-800 font-black text-sm md:text-xl">2026年1月10日</span>
                   </div>
                 </div>
 
-                <p className="text-white/80 font-bold text-xs sm:text-sm tracking-[0.2em] uppercase max-w-lg">
-                  上午出发开启烧烤之旅 · 下午活动结束各自归家
+                <p className="text-white/80 font-bold text-[10px] sm:text-sm tracking-[0.2em] uppercase max-w-lg leading-relaxed">
+                  上午出发开启烧烤之旅 · 亲子友好 · 方案自选
                 </p>
               </div>
             </div>
@@ -186,9 +182,9 @@ const App: React.FC = () => {
             {/* Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
               {[
-                { icon: "👨‍👩‍👧‍👦", title: "带上家属", desc: "大人费用自理，<span class='text-orange-600 font-black'>小朋友统统免费</span>！" },
-                { icon: "📍", title: "两个地点", desc: "JOJO 精选两地备选，点击下方报名参与投票。" },
-                { icon: "📸", title: "实时分享", desc: "专属图集系统，活动当天随手拍随手传。" }
+                { icon: "👨‍👩‍👧‍👦", title: "家属政策", desc: "大人费用自理，<span class='text-orange-600 font-black'>小朋友统统免费</span>！" },
+                { icon: "📍", title: "地点备选", desc: "JOJO 精选两地，点击报名页查看详细方案。" },
+                { icon: "🍢", title: "美味烧烤", desc: "提供全套烧烤工具及新鲜食材，尽享秋日美味。" }
               ].map((item, idx) => (
                 <div key={idx} className="autumn-card p-6 md:p-8 rounded-[2rem] text-center space-y-3 hover:scale-[1.02] transition-transform duration-300">
                   <div className="text-4xl mb-2">{item.icon}</div>
@@ -203,9 +199,8 @@ const App: React.FC = () => {
                 onClick={() => setActiveTab(AppTab.REGISTER)}
                 className="w-full sm:w-auto px-16 py-5 corsair-gradient text-black font-black uppercase text-lg rounded-2xl shadow-xl shadow-yellow-200/50 hover:shadow-yellow-400/50 transition-all transform active:scale-95"
               >
-                立即报名预定
+                立即报名
               </button>
-              <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">已有 {registrations.length} 人提交了意向</p>
             </div>
           </div>
         )}
@@ -214,7 +209,7 @@ const App: React.FC = () => {
           <div className="max-w-3xl mx-auto space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="text-center">
               <h2 className="text-3xl font-black text-zinc-800 uppercase tracking-tighter">报名登记表</h2>
-              <p className="text-zinc-500 font-medium italic">请准确填写信息，以便 JOJO 准备充足的物资</p>
+              <p className="text-zinc-500 font-medium italic">请准确填写，方便 JOJO 统计物资</p>
             </div>
             <RegistrationForm onSubmit={handleRegistrationSubmit} />
           </div>
@@ -236,21 +231,21 @@ const App: React.FC = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-black text-zinc-900">ADMIN LOGIN</h2>
-                  <p className="text-xs text-zinc-400 uppercase tracking-widest font-black mt-2">请输入后台访问授权码</p>
+                  <h2 className="text-2xl font-black text-zinc-900 uppercase">Admin Access</h2>
+                  <p className="text-xs text-zinc-400 font-black mt-2">请输入管理密码</p>
                 </div>
                 <form onSubmit={handleAdminLogin} className="space-y-6">
                   <input
                     type="password"
                     value={adminPassword}
                     onChange={(e) => setAdminPassword(e.target.value)}
-                    className="w-full bg-orange-50 border-2 border-orange-100 p-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:border-yellow-400 text-center text-2xl tracking-[0.5em] font-black text-zinc-800 transition-all"
+                    className="w-full bg-orange-50 border-2 border-orange-100 p-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-yellow-400 text-center text-2xl tracking-[0.5em] font-black text-zinc-800"
                     placeholder="••••••••"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full py-5 bg-zinc-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-200"
+                    className="w-full py-5 bg-zinc-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-zinc-800 transition-all"
                   >
                     解锁后台数据
                   </button>
@@ -263,34 +258,29 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Footer Navigation */}
       <footer className="mt-20 py-12 bg-zinc-900 text-zinc-400 border-t-4 border-yellow-400">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-yellow-400 rounded-xl">
-              <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                <path d="M20 5L35 30H5L20 5Z" fill="#000" />
-              </svg>
+              <svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M20 5L35 30H5L20 5Z" fill="#000" /></svg>
             </div>
-            <div className="flex flex-col">
-              <span className="font-corsair text-white font-black tracking-[0.2em] uppercase text-sm">Corsair BBQ</span>
-              <span className="text-[10px] font-bold opacity-50 uppercase">Team Building 2026</span>
+            <div>
+              <span className="font-corsair text-white font-black tracking-[0.2em] uppercase text-sm block">Corsair Team</span>
+              <span className="text-[10px] font-bold opacity-50 uppercase">Dongguan BBQ 2026</span>
             </div>
           </div>
           
-          <div className="flex flex-col items-center md:items-end gap-4">
-            <div className="flex gap-6">
-              <button 
-                onClick={() => setActiveTab(AppTab.ADMIN)}
-                className="flex items-center gap-2 text-xs font-black text-zinc-400 hover:text-yellow-400 uppercase tracking-widest transition-all"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                后台管理入口
-              </button>
-            </div>
-            <p className="text-[10px] font-bold opacity-30 uppercase tracking-[0.3em]">© 2024 Corsair Gaming Inc. All Rights Reserved.</p>
+          <div className="flex flex-col items-center md:items-end gap-3">
+            <button 
+              onClick={() => setActiveTab(AppTab.ADMIN)}
+              className="flex items-center gap-2 text-[10px] font-black text-zinc-400 hover:text-yellow-400 uppercase tracking-widest transition-all"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              管理中心
+            </button>
+            <p className="text-[10px] font-bold opacity-30 uppercase tracking-[0.3em]">© 2024 Corsair Gaming Inc.</p>
           </div>
         </div>
       </footer>
